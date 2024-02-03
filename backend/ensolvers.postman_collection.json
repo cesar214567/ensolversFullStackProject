@@ -1,0 +1,174 @@
+{
+	"info": {
+		"_postman_id": "6b3e8334-7b58-4a0e-812e-661d33ff025b",
+		"name": "ensolvers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "8335855"
+	},
+	"item": [
+		{
+			"name": "Notes",
+			"item": [
+				{
+					"name": "get notes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/notes?active=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"notes"
+							],
+							"query": [
+								{
+									"key": "active",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get notes by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8000/notes"
+					},
+					"response": []
+				},
+				{
+					"name": "delete notes by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8000/notes"
+					},
+					"response": []
+				},
+				{
+					"name": "create notes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"post\":\"This is a post\",\n    \"active\":true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/notes"
+					},
+					"response": []
+				},
+				{
+					"name": "update notes",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"post\":\"This is a post\",\n    \"active\":true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/notes/25cfffde-e275-4c70-8f94-9b7f91ad16af"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "create category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"This is a category\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/categories"
+					},
+					"response": []
+				},
+				{
+					"name": "get categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8000/notes"
+					},
+					"response": []
+				},
+				{
+					"name": "delete category by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8000/category/35190efc-d1bf-4cb9-8d8e-a0ac35bfe6ef"
+					},
+					"response": []
+				},
+				{
+					"name": "get categories by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8000/notes"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admins",
+			"item": [
+				{
+					"name": "localhost:8000/admins",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"cesar.madera@utec.edu.pe\",\n    \"password\":\"123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8000/admins"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
