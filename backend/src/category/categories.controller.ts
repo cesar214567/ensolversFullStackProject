@@ -1,8 +1,5 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Res } from '@nestjs/common';
-import { AppService } from '../app.service';
-import path from 'path';
 import { CategoriesService } from './categories.service';
-import { Categories } from './categories.entity';
 import { CreateCategoriesDTO } from './dtos/create-categories.dto';
 
 @Controller("/categories")
@@ -41,6 +38,6 @@ export class CategoriesController {
     const deleted = await this.categoriesService.deleteCategoryById(id);
     response
       .status(deleted ? HttpStatus.OK : HttpStatus.NOT_FOUND)
-      .send()
+      .send({})
   }
 }

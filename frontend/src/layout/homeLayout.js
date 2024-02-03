@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, useNavigate, BrowserRouter } from "react-router-dom";
 
-const Home = (props) => {
+const HomeLayout = (props) => {
     const { loggedIn, email } = props
     const navigate = useNavigate();
     
@@ -14,9 +14,9 @@ const Home = (props) => {
             <div class="container">
                 <div class="section no-pad-bot" id="index-banner">
                     <div class="container">
-                    <h1 class="header center orange-text">Personal Project</h1>
+                    <h1 class="header center orange-text">Ensolver Project</h1>
                     <div class="row center">
-                        <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+                        <h5 class="header col s12 light">A notes management fullstack app</h5>
                     </div>
                     <div class="row center">
                         <Link to="#" className="btn-large waves-effect waves-light orange">Get Started</Link>
@@ -66,4 +66,4 @@ const Home = (props) => {
     );
 }
 
-export default Home
+export default HomeLayout

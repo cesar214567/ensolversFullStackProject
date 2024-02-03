@@ -11,8 +11,10 @@ export class NotesController {
 
   @Get()
   async getNotes(@Res() response, @Query() queryParams){
-    const {active,...rest} = queryParams;
-    return response.status(HttpStatus.OK).send(await this.notesService.getAllNotes(active));
+    const {active,categoryId,...rest} = queryParams;
+    console.log(categoryId)
+    const category = categoryId? {id:categoryId}: null
+    return response.status(HttpStatus.OK).send(await this.notesService.getAllNotes(active,category));
   }
 
   @Get("/:id")
@@ -39,18 +41,22 @@ export class NotesController {
   
   @Delete("/:id")
   async deleteNote(@Res() response, @Param('id')id:string){
+    console.log(id);
     const deleted = await this.notesService.deleteNoteById(id);
     response
       .status(deleted ? HttpStatus.OK : HttpStatus.NOT_FOUND)
       .send()
   }
 
-  @Put()
-  async updateNote(@Res() response,@Body() note:UpdateNoteDTO){
+  @Put("/:id")
+  async updateNote(@Res() response,@Body() note:UpdateNoteDTO,@Param('id')noteId:string){
     try{
-      const {category, ...rest} = note;
-      const categoryObject = await this.categoriesService.findCategoryById(category);
+      console.log(noteId);
+      console.log(note);
+      const {category_id, ...rest} = note;
+      const categoryObject = await this.categoriesService.findCategoryById(category_id);
       const noteToUpdate = {...rest, category:categoryObject}
+      noteToUpdate.id = noteId;
       const {id, ...updatedNote} = await this.notesService.createNote(noteToUpdate); 
       return response
       .status(HttpStatus.OK)

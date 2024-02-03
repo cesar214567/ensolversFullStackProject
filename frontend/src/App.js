@@ -1,38 +1,40 @@
 import { BrowserRouter, Route, Routes,Outlet, Link } from 'react-router-dom';
-import Home from './layout/home';
-import Login from './layout/login';
+import HomeLayout from './layout/homeLayout';
+import LoginLayout from './layout/loginLayout';
 import './App.css';
 import { useEffect, useState } from 'react';
 import './App.css';
+import DashboardLayout from './layout/dashboardLayout';
 
 export default function App() {
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [email, setEmail] = useState("")
-
+  const [userInfo, setUserInfo] = useState("")
+  const handleUserInfo = (userInfoTemp) => setUserInfo(userInfoTemp);
+  let loginButton;
+  if (""== userInfo){
+    loginButton = (
+      <ul class="right hide-on-med-and-down">
+                <li>
+                  <Link to="./login">login</Link>
+                </li>
+                <Outlet/>
+              </ul>
+    )
+  }
   return (
     <div className="App">
       <BrowserRouter>
         
           <nav class="light-blue lighten-1" role="navigation">
             <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Ensolvers</a>
-              <ul class="right hide-on-med-and-down">
-                <li>
-                  <Link to="./login">Ensolvers</Link>
-                </li>
-                <Outlet/>
-              </ul>
-
-              <ul id="nav-mobile" class="sidenav">
-                <li>
-                  <Link to="/">Login</Link>
-                </li>
-              </ul>
+              {loginButton}
               <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             </div>
           </nav>
           <Routes>
-            <Route path="/" element={<Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} />
-            <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setEmail={setEmail} />} />
+            <Route path="/" element={<HomeLayout userInfo={userInfo}/>} />
+            <Route path="/login" element={<LoginLayout userInfo={userInfo} handleUserInfo={handleUserInfo} />} />
+            <Route path="/dashboard/*" element={<DashboardLayout userInfo={userInfo}  />} />
+            
           </Routes>
           
           
@@ -67,7 +69,7 @@ export default function App() {
           </div>
           <div class="footer-copyright">
             <div class="container">
-            Made by <a class="orange-text text-lighten-3" href="http://github.com/cesar214567">Created by cesar214567</a>
+            <a class="orange-text text-lighten-3" href="http://github.com/cesar214567">Created by cesar214567</a>
             </div>
           </div>
         </footer>

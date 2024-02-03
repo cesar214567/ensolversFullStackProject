@@ -3,12 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Categories } from './categories.entity';
 import { CreateCategoriesDTO } from './dtos/create-categories.dto';
+import { Notes } from 'src/notes/notes.entity';
 
 @Injectable()
 export class CategoriesService {
   constructor(
     @InjectRepository(Categories)
     private readonly categoriesRepository: Repository<Categories>,
+    @InjectRepository(Notes)
+    private readonly notesRepository: Repository<Notes>
   ) {}
 
   async createCategory(Categorie:CreateCategoriesDTO): Promise<Categories> {
@@ -25,6 +28,7 @@ export class CategoriesService {
   }
 
   async deleteCategoryById(id:string): Promise<Boolean> {
+    await this.notesRepository.update({category:{id}},{category:null})
     const deletedResponse = await this.categoriesRepository.delete({id});
     console.log(deletedResponse);
     return deletedResponse.affected===1;

@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { doLogin } from "../api/login";
 
-const Login = (props) => {
+
+const LoginLayout = ({userInfo, handleUserInfo}) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [emailError, setEmailError] = useState("")
     const [passwordError, setPasswordError] = useState("")
-    
     const navigate = useNavigate();
         
-    const onButtonClick = () => {
+    const onButtonClick = async () => {
 
         // Set initial error values to empty
         setEmailError("")
         setPasswordError("")
-
         // Check if the user has entered both fields correctly
         if ("" === email) {
             setEmailError("Please enter your email")
@@ -35,9 +35,15 @@ const Login = (props) => {
             setPasswordError("The password must be 8 characters or longer")
             return
         }
-
         // Authentication calls will be made here...       
         
+        const temp = await doLogin(email,password,setPasswordError);
+        const {access_token} = temp;
+        await handleUserInfo({
+            email:email,
+            jwt: access_token
+        })
+        navigate("/dashboard", {userInfo})
     }
 
     return <div className="container">
@@ -79,4 +85,4 @@ const Login = (props) => {
     </div>
 }
 
-export default Login
+export default LoginLayout
